@@ -7,7 +7,7 @@ class BooksController < ApplicationController
     @book = Book.new(book_params) 
     if @book.save
       flash[:notice] = "Book was successfully created."
-      redirect_to show_book_path(@book.id) #各々のshowページに飛ぶ
+      redirect_to book_path(@book.id) #各々のshowページに飛ぶ
     else
       @books = Book.all
       # アクションが変わると、リセットされ手ぶらになる
@@ -33,9 +33,9 @@ class BooksController < ApplicationController
     book = Book.find(params[:id])
     if book.update(book_params)
       flash[:notice] = "Book was successfully updated."
-      redirect_to show_book_path(book.id)
+      redirect_to book_path(book.id)
     else
-      @book = Book.find(params[:id])   #ここはなに？なぜ一回捨てたはずのものがあるの？
+      @book = Book.find(params[:id])   #ここはなに？なぜ一回捨てたはずのものがあるの？form withを再表示させるために再度updateを行っている
       @book.update(book_params)
       render :edit
     end
@@ -44,6 +44,7 @@ class BooksController < ApplicationController
   def destroy
     book = Book.find(params[:id])
     book.destroy 
+    flash[:notice] = "Book was successfully destroyed."
     redirect_to '/books'
   end 
   

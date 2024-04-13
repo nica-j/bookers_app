@@ -9,7 +9,7 @@
 <% end %>
 
 <!--form withのデフォルトはクリエイトなので、あえてurl指定している-->
-<%= form_with model: @book ,url: update_book_path(@book.id), method: :patch do |f| %>
+<%= form_with model: @book ,url: book_path(@book.id), method: :patch do |f| %>
   <p>Title</p>
   <%= f.text_field :title %>
   <p>Body</p>
@@ -18,5 +18,5 @@
   <%= f.submit 'Update Book' %>
 <% end %> 
 
-<p><%= link_to 'Show',show_book_path(@book.id) %></p>
-<p><%= link_to 'Back','/books' =%></p>
+<p><%= link_to 'Show', book_path(@book.id) %></p>
+<p><%= link_to 'Back', books_path =%></p>
