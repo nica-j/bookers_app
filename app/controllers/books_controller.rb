@@ -4,10 +4,15 @@ class BooksController < ApplicationController
   end
 
   def create
-    # logger.debug(params)
-    book = Book.new(book_params) 
-    book.save
-    redirect_to book_path(book.id) #各々のshowページに飛ぶ
+    @book = Book.new(book_params) 
+    if @book.save
+      flash[:notice] = "Book was successfully created."
+      redirect_to show_book_path(@book.id) #各々のshowページに飛ぶ
+    else
+      @books = Book.all
+      # アクションが変わると、リセットされ手ぶらになる
+      render :index
+    end
   end
   
   def index
@@ -26,8 +31,14 @@ class BooksController < ApplicationController
   
   def update
     book = Book.find(params[:id])
-    book.update(book_params)
-    redirect_to book_path(book.id)
+    if book.update(book_params)
+      flash[:notice] = "Book was successfully updated."
+      redirect_to show_book_path(book.id)
+    else
+      @book = Book.find(params[:id])   #ここはなに？なぜ一回捨てたはずのものがあるの？
+      @book.update(book_params)
+      render :edit
+    end
   end
   
   def destroy
