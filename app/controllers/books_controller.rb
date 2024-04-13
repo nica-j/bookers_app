@@ -7,14 +7,16 @@ class BooksController < ApplicationController
     # logger.debug(params)
     book = Book.new(book_params) 
     book.save
-    redirect_to '/books/show' #各々のshowページに飛ぶ
+    redirect_to book_path(book.id) #各々のshowページに飛ぶ
   end
   
   def index
     @books = Book.all
+    
   end
 
   def show
+    @book = Book.find(params[:id])
   end
 
   def edit
