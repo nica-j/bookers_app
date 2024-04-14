@@ -2,3 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+.show-data{
+    margin: 10px 40px 20px 40px;
+}
+
+table{
+  width:100%;
+}
+table .title{
+  width:40%;
+  word-break : break-all;
+}
+table .body{
+  width:40%;
+  word-break : break-all;
+}

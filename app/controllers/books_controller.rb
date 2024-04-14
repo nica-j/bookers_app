@@ -45,7 +45,7 @@ class BooksController < ApplicationController
     book = Book.find(params[:id])
     book.destroy 
     flash[:notice] = "Book was successfully destroyed."
-    redirect_to '/books'
+    redirect_to '/books' #id指定しないときのredirect_to　URL指定ではないといけないので、path指定
   end 
   
   
